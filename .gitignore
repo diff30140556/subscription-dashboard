@@ -1,47 +1,73 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Frontend dependencies
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.*
+frontend/.yarn/*
+!frontend/.yarn/patches
+!frontend/.yarn/plugins
+!frontend/.yarn/releases
+!frontend/.yarn/versions
 
-# testing
-/coverage
+# Frontend testing
+frontend/coverage/
 
-# next.js
-/.next/
-/out/
+# Frontend next.js
+frontend/.next/
+frontend/out/
 
-# production
-/build
+# Frontend production
+frontend/build/
 
-# misc
+# Frontend misc
+frontend/.DS_Store
+frontend/*.pem
+
+# Frontend debug
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+
+# Frontend env files (can opt-in for committing if needed)
+frontend/.env*
+
+# Frontend vercel
+frontend/.vercel
+
+# Frontend typescript
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# Backend Python
+backend/__pycache__/
+backend/py/__pycache__/
+backend/**/__pycache__/
+backend/venv/
+backend/.venv/
+backend/.env
+backend/*.pyc
+backend/**/*.pyc
+
+# Backend ML models (optional - you might want to commit these)
+backend/models/*.pkl
+backend/models/*.json
+
+# Backend logs
+backend/*.log
+backend/logs/
+
+# General
 .DS_Store
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# Python
-venv/
-__pycache__/
-
-# vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
-.vercel
+# OS
+Thumbs.db
