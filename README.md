@@ -1,130 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Churn Analysis Platform
 
-## Getting Started
+A comprehensive customer churn analysis platform with separate frontend and backend services for independent deployment.
 
-First, run the development server:
+## Architecture
 
+This project is organized into two independent services:
+
+- **Frontend** (`frontend/`) - Next.js dashboard deployed on Vercel
+- **Backend** (`backend/`) - Python FastAPI service with ML models and AI insights
+
+## Quick Start
+
+### Backend Setup
+
+1. Navigate to backend directory:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd backend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Python Data Pipeline
-
-This project includes a Python data cleaning and aggregation pipeline for churn analysis.
-
-### Setup Python Environment
-
-**Activate virtual environment:**
-
-**Windows Git Bash:**
-```bash
-source venv/Scripts/activate
-```
-
-**Windows PowerShell:**
-```powershell
-venv\Scripts\Activate.ps1
-```
-
-**Windows Command Prompt:**
-```cmd
-venv\Scripts\activate.bat
-```
-
-**Install dependencies:**
+2. Install Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Database Setup
-
-Create the summary table in Supabase by running this SQL in the Supabase SQL editor:
-
-```sql
-create table if not exists churn_summary (
-  id uuid primary key default gen_random_uuid(),
-  snapshot_ts timestamptz not null default now(),
-  payload jsonb not null
-);
-create index if not exists idx_churn_summary_snapshot on churn_summary (snapshot_ts desc);
-```
-
-### Running the Pipeline
-
-**Test Supabase connectivity:**
+3. Set up environment variables:
 ```bash
-python scripts/test_supabase.py
+cp .env.example .env
+# Edit .env with your credentials
 ```
 
-**Run the main aggregation pipeline:**
+4. Start the backend server:
 ```bash
-python scripts/clean_and_aggregate.py
+python main.py
 ```
 
-### Environment Variables
+The API will be available at http://localhost:8000
 
-**Security Note:** 
-- `.env` contains `SUPABASE_SERVICE_ROLE_KEY` for backend Python scripts - **never commit this file**
-- `.env.local` contains `NEXT_PUBLIC_*` variables for frontend - safe for client use
-- Only use service role key in server-side Python scripts, never in frontend code
+### Frontend Setup
 
-### Accessing Results in Next.js
-
-Example Server Component to display the latest churn summary:
-
-```typescript
-// app/churn/summary/page.tsx
-import { createClient } from '@/lib/supabase'
-
-export default async function ChurnSummaryPage() {
-  const supabase = createClient()
-  
-  const { data: summary } = await supabase
-    .from('churn_summary')
-    .select('*')
-    .order('snapshot_ts', { ascending: false })
-    .limit(1)
-    .single()
-
-  if (!summary) {
-    return <div>No summary data available</div>
-  }
-
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Latest Churn Summary</h1>
-      <p className="mb-4">Generated: {new Date(summary.snapshot_ts).toLocaleString()}</p>
-      <pre className="bg-gray-100 p-4 rounded text-sm overflow-auto">
-        {JSON.stringify(summary.payload, null, 2)}
-      </pre>
-    </div>
-  )
-}
+1. Navigate to frontend directory:
+```bash
+cd frontend
 ```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.local.example .env.local
+# Edit .env.local with your configuration
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+The frontend will be available at http://localhost:3000
+
+## Deployment
+
+### Frontend (Vercel)
+- Push to GitHub
+- Connect repository to Vercel
+- Set environment variables in Vercel dashboard
+- Deploy automatically
+
+### Backend (Various Options)
+- Railway
+- Render
+- Heroku
+- DigitalOcean App Platform
+- AWS Lambda (with Mangum)
+
+## Features
+
+- **Real-time churn analysis** with PostgreSQL/Supabase
+- **ML-powered predictions** using scikit-learn
+- **AI-powered insights** with OpenAI GPT-4o
+- **Interactive dashboard** with Next.js
+- **Comprehensive API** with FastAPI
+- **Production-ready** with proper error handling and logging
+
+## API Documentation
+
+Once the backend is running, visit:
+- http://localhost:8000/docs - Interactive API documentation
+- http://localhost:8000/redoc - Alternative API documentation
+
+## Contributing
+
+1. Make changes to the appropriate service (frontend/ or backend/)
+2. Test locally
+3. Submit pull request
+
+For more details, see the README files in each service directory.
