@@ -1,3 +1,4 @@
+supabase==2.*
 # FastAPI Backend Requirements for Churn Analysis
 # Python 3.11+ compatible
 
