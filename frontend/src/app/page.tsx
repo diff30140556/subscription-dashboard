@@ -12,9 +12,6 @@ import {
   FeaturesPanel,
   ModelPanel,
   CustomersPanel,
-  ContractChart,
-  GenerateCustomersPanel,
-  AIInsightsPanel,
 } from '@/components';
 
 export default function DashboardPage() {
@@ -26,8 +23,6 @@ export default function DashboardPage() {
         return <KpiPanel />;
       case 'contract':
         return <ContractPanel />;
-      case 'contract-chart':
-        return <ContractChart />;
       case 'payment':
         return <PaymentPanel />;
       case 'tenure':
@@ -40,10 +35,6 @@ export default function DashboardPage() {
         return <ModelPanel />;
       case 'customers':
         return <CustomersPanel />;
-      case 'generate':
-        return <GenerateCustomersPanel />;
-      case 'ai-insights':
-        return <AIInsightsPanel />;
       default:
         return <KpiPanel />;
     }
@@ -55,7 +46,7 @@ export default function DashboardPage() {
       <aside className="flex-shrink-0">
         <SideNav />
       </aside>
-      
+
       {/* Main content area */}
       <main className="flex-1 overflow-auto">
         <div className="p-8">
