@@ -20,9 +20,13 @@ app.add_middleware(
         "http://localhost:3000",  # optional for local dev
     ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.options("/{path:path}")
+async def options_handler(path: str):
+    return {"message": "OK"}
 
 # Add the py module to the Python path
 backend_dir = Path(__file__).parent
