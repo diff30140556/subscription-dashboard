@@ -12,6 +12,8 @@ import {
   FeaturesPanel,
   ModelPanel,
   CustomersPanel,
+  AIInsightsPanel,
+  GenerateCustomersPanel,
 } from '@/components';
 
 export default function DashboardPage() {
@@ -35,6 +37,10 @@ export default function DashboardPage() {
         return <ModelPanel />;
       case 'customers':
         return <CustomersPanel />;
+      case 'ai-insights':
+        return <AIInsightsPanel />;
+      case 'generate':
+        return <GenerateCustomersPanel />;
       default:
         return <KpiPanel />;
     }
