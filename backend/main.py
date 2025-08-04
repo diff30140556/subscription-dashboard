@@ -12,21 +12,34 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# More explicit CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://churn-insight.vercel.app",
-        "https://*.vercel.app",
-        "http://localhost:3000",  # optional for local dev
+        "https://*.vercel.app",  # Allow all Vercel subdomains
+        "http://localhost:3000",
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=[
+        "Accept",
+        "Accept-Language",
+        "Content-Language",
+        "Content-Type",
+        "Authorization",
+    ],
 )
 
+# Explicit OPTIONS handler
 @app.options("/{path:path}")
 async def options_handler(path: str):
-    return {"message": "OK"}
+    return {"status": "ok"}
+
+# Add a health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 # Add the py module to the Python path
 backend_dir = Path(__file__).parent
