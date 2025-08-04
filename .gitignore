@@ -71,3 +71,6 @@ backend/logs/
 
 # OS
 Thumbs.db
+
+
+.venv/
