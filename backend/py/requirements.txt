@@ -33,3 +33,4 @@ structlog==23.2.*
 
 # Optional: API documentation enhancements
 pydantic==2.5.*
+starlette>=0.27.0,<0.28.0
