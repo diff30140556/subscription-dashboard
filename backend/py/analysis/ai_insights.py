@@ -44,21 +44,24 @@ class ChurnInsightsAI:
         
         # Initialize OpenAI client with explicit parameters only
         try:
-            self.client = OpenAI(api_key=self.api_key)
-        except Exception as e:
-            # If there are initialization issues, try with minimal parameters
-            logger.warning(f"Initial OpenAI client creation failed: {e}")
             # Clear any proxy-related environment variables that might interfere
-            proxy_vars = ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy']
+            proxy_vars = ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy', 'all_proxy', 'ALL_PROXY']
+            original_proxy_values = {}
             for var in proxy_vars:
                 if var in os.environ:
+                    original_proxy_values[var] = os.environ[var]
                     del os.environ[var]
-            try:
-                self.client = OpenAI(api_key=self.api_key)
-                logger.info("OpenAI client created successfully after clearing proxy vars")
-            except Exception as e2:
-                logger.error(f"Failed to create OpenAI client: {e2}")
-                raise ValueError(f"Could not initialize OpenAI client: {e2}")
+            
+            # Initialize with minimal parameters - only api_key
+            self.client = OpenAI(api_key=self.api_key)
+            logger.info("OpenAI client created successfully")
+            
+        except Exception as e:
+            logger.error(f"Failed to create OpenAI client: {e}")
+            # Try to restore proxy environment variables if they existed
+            for var, value in original_proxy_values.items():
+                os.environ[var] = value
+            raise ValueError(f"Could not initialize OpenAI client: {str(e)}")
         
         # Model configuration
         self.model = "gpt-4o"
