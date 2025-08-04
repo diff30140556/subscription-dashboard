@@ -16,10 +16,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://churn-insight.vercel.app",
+        "https://*.vercel.app",
         "http://localhost:3000",  # optional for local dev
     ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
