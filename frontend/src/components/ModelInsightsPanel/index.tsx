@@ -83,6 +83,7 @@ const ModelInsightsPanel: React.FC = () => {
       setModelData(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch model data');
+      console.error('Failed to fetch model data:', err);
       setModelData(null);
     } finally {
       setLoading(false);
@@ -129,6 +130,7 @@ const ModelInsightsPanel: React.FC = () => {
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to retrain model';
       showToast(errorMsg, 'error');
+      console.error('Failed to retrain model:', err);
     } finally {
       setIsRetraining(false);
     }

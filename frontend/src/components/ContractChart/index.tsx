@@ -172,7 +172,7 @@ const ContractChart: React.FC = () => {
           <div className="text-red-500 text-sm">{error}</div>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm transition-colors"
+            className="mt-4 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm transition-colors cursor-pointer"
           >
             Retry
           </button>

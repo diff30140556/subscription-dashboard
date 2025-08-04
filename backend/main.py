@@ -15,7 +15,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://churn-insight-5b8dwyzsz-diff30140556s-projects.vercel.app",
+        "https://churn-insight.vercel.app",
         "http://localhost:3000",  # optional for local dev
     ],
     allow_credentials=True,

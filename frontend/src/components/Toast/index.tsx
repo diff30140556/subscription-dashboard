@@ -103,7 +103,7 @@ const Toast: React.FC<ToastProps> = ({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="flex-shrink-0 ml-3 p-1 rounded-full hover:bg-black hover:bg-opacity-20 transition-colors duration-200"
+          className="flex-shrink-0 ml-3 p-1 rounded-full hover:bg-black hover:bg-opacity-20 transition-colors duration-200 cursor-pointer"
           aria-label="Close notification"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
