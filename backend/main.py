@@ -7,6 +7,7 @@ This file allows running the backend from the backend/ directory.
 import sys
 import os
 from pathlib import Path
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -29,7 +30,6 @@ sys.path.insert(0, str(py_dir))
 
 # Load environment variables first
 from dotenv import load_dotenv
-
 load_dotenv(backend_dir / ".env")
 
 # Import and run the main application
@@ -37,4 +37,10 @@ import uvicorn
 
 if __name__ == "__main__":
     # Run development server
-    uvicorn.run("py.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info")
+    uvicorn.run(
+        "py.main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        log_level="info"
+    )
