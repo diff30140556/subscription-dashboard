@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type DashboardTab = 
+export type DashboardTab =
   | 'kpi'
   | 'contract'
   | 'payment'
@@ -10,7 +10,8 @@ export type DashboardTab =
   | 'model'
   | 'customers'
   | 'generate'
-  | 'ai-insights';
+  | 'ai-insights'
+  | 'contract-chart';
 
 interface DashboardState {
   activeTab: DashboardTab;
@@ -33,6 +34,7 @@ export const useDashboardStore = create<DashboardState>((set) => ({
     customers: false,
     generate: false,
     'ai-insights': false,
+    'contract-chart': false,
   },
   setLoading: (tab, loading) =>
     set((state) => ({
