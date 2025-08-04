@@ -28,7 +28,7 @@ const SideNav: React.FC = () => {
   return (
     <nav className="w-64 bg-white border-r border-gray-200 h-full">
       <div className="p-6">
-        <h1 className="text-xl font-bold text-gray-900 mb-8">Churn Dashboard</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-8">Apple Music Subscription</h1>
         
         <ul className="space-y-2">
           {navItems.map((item) => {
