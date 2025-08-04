@@ -92,7 +92,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # Next.js dev server
         "http://localhost:8000",  # FastAPI dev server
-        "https://yourdomain.com", # Production domain
+        "https://churn-insight.vercel.app", # Production domain
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
