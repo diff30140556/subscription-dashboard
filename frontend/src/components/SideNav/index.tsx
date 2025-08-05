@@ -22,13 +22,38 @@ const navItems: NavItem[] = [
   { label: 'Generate Customers', tab: 'generate' },
 ];
 
-const SideNav: React.FC = () => {
+interface SideNavProps {
+  onClose?: () => void;
+}
+
+const SideNav: React.FC<SideNavProps> = ({ onClose }) => {
   const { activeTab, setActiveTab } = useDashboardStore();
 
+  const handleTabClick = (tab: DashboardTab) => {
+    setActiveTab(tab);
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <nav className="w-64 bg-white border-r border-gray-200 h-full">
+    <nav className="w-64 bg-white border-r border-gray-200 h-full shadow-lg md:shadow-none">
       <div className="p-6">
-        <h1 className="text-xl font-bold text-gray-900 mb-8">Apple Music Subscription</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-xl font-bold text-gray-900">Apple Music Subscription</h1>
+          {/* Close button for mobile */}
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Close menu"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+        </div>
         
         <ul className="space-y-2">
           {navItems.map((item) => {
@@ -37,7 +62,7 @@ const SideNav: React.FC = () => {
             return (
               <li key={item.tab}>
                 <button
-                  onClick={() => setActiveTab(item.tab)}
+                  onClick={() => handleTabClick(item.tab)}
                   className={`
                     w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer
                     ${isActive 
